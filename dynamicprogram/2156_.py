@@ -2,8 +2,10 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-grape = [int(input()) for _ in range(n)]
-
+grape = [0]*10000
+for i in range(n):
+    grape[i] = int(input())
+    
 d = [0]*10000
 d[0] = grape[0]
 d[1] = grape[0] + grape[1]
