@@ -10,8 +10,8 @@ def binary_search(array, target, start, end):
     mid = (start + end) // 2
     if array[mid] == target:
         result += 1
-        return binary_search(array, target, start, mid - 1)
-        return binary_search(array, target, mid + 1, end)
+        binary_search(array, target, start, mid - 1)
+        binary_search(array, target, mid + 1, end)
     elif array[mid] > target:
         return binary_search(array, target, start, mid - 1)
     else:

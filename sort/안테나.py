@@ -6,7 +6,7 @@ places.sort() # 오름차순 정렬
 result = 100000
 
 for place in places:
-    expect = list(map(lambda x: x-place, places))
+    expect = list(map(lambda x: abs(x-place), places))
     distance = sum(expect)
 
     if distance < result:
