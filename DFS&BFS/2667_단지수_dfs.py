@@ -12,7 +12,7 @@ def dfs(x,y):
         return False
 
     if graph[x][y] == 1:
-        global count
+        global count # global 변수에 유의하기
         count += 1
         graph[x][y] = 0
         for i in range(4):
