@@ -15,7 +15,7 @@ def dfs(x, y, d):
     for _ in range(4):
         # 90도씩 왼쪽으로 회전하면서 청소할 곳이 있는지 확인
         nd = (d + 3) % 4
-        nx, ny = x + dx[i], y + dy[i]
+        nx, ny = x + dx[nd], y + dy[nd]
         if graph[nx][ny] == 0:
             # 청소
             dfs(nx, ny, nd)
