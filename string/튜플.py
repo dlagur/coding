@@ -25,5 +25,5 @@ from collections import Counter
 
 def solution(s):
 
-    s = Counter(re.findall('\d+', s))
+    s = Counter(re.findall('\d+', s)) # 카운트 개수를 세어주고, 딕셔너리 객체 반환
     return list(map(int, [k for k, v in sorted(s.items(), key=lambda x: x[1], reverse=True)]))
