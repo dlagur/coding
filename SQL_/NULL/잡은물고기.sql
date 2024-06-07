@@ -1,2 +1,4 @@
 SELECT ROUND(SUM(IFNULL(LENGTH, 10))/COUNT(*),2) AS AVERAGE_LENGTH
 FROM FISH_INFO;
+// 소수점 셋째 자리에서 반올림
+// Round(attribute ,2)
