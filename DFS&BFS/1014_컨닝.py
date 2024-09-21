@@ -11,7 +11,7 @@ def bip_match(n, m):  # 이분 매칭 --> 앉을 수 없는 경우를 추가함
         if 0 <= nn < N and 0 <= mm < M and not visited[nn][mm] and seat[nn][mm]:
             visited[nn][mm] = True
             if connect[nn][mm] == [-1, -1] or bip_match(connect[nn][mm][0], connect[nn][mm][1]):
-                # 앉을 수 있는 좌석인데 -1, -1 :
+                #  앉을 수 있는 좌석인데 -1, -1 :
                 connect[nn][mm] = [n, m]
                 return True
     return False

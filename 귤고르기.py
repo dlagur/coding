@@ -6,8 +6,7 @@ def solution(k, tangerine):
     for t in tangerine:
         g[t] = g.get(t, 0) + 1
 
-    g = list(g.values())
-    g.sort(reverse=True)  # O(nlogn)
+    g = sorted(g.values(), reverse=True)  # O(nlogn)
     # 그리디 방식으로 k를 만족시키는 최소 귤 종류 선정
     # 가장 많은 개수를 가진 귤의 갯수부터 정리
 
