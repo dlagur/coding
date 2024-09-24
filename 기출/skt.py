@@ -19,7 +19,6 @@
 - 새로운 전시가 시작되면 다시 관람할 수 있지만, 여전히 추천을 받아야 합니다.
 - 같은 테마의 전시를 두 번 관람한 사람은 그 테마를 더 이상 관람하거나 추천하지 않습니다.
 """
-from collections import deque
 
 def sol(exhibitions: list, connections: list) -> list:
 
@@ -40,19 +39,65 @@ exhibitions = ['pop', 'pop', 'pop', 'landscape', 'landscape']
 
 # 전시회 방문횟수 체크
 bp = [0]*(connections[-1][-1] + 1) #
-Flag = False # 전시회 주제 변경 여부
 
 result = []
+def bfs():
+    q = [1]
+    i = 0
+    Flag = exhibitions[0] # 전시회 주제 변경 여부
+
+    while i < len(exhibitions):
+        if Flag != exhibitions[i]:
+            Flag = exhibitions[i]
+            bp = [0] * (connections[-1][-1] + 1)
+        result.append(len(q))
+        for n in q:
+            if bp[n] < 2:
+                bp[n] += 1
+                conn = {num[1] for num in connections if n in num and bp[n] < 2} # {2, 4}
+        conn = list(conn)
+        i += 1
+
+bfs()
+
+
+## connection 리스트를 인접 행렬, 인접 리스트로 표현하기
+
+# 인접 리스트 생성
+adj_list = {}
+for u, v in connections:
+    if u not in adj_list:
+        adj_list[u] = []
+    if v not in adj_list:
+        adj_list[v] = []
+    adj_list[u].append(v)
+    adj_list[v].append(u)
 
 def bfs():
-    q = deque()
-    q.append(1)
-    while True:
-        n = q.popleft()
-        if bp[n] < 2: # 전시회를 2번 미만으로 본 사람인 경우
-            bp[n] += 1
-        conn = [num for num in connections if n in num]
-        
+    q = [1]
+    i = 0
+    Flag = exhibitions[0]  # 전시회 주제 변경 여부
+    bp = [0] * (max(adj_list) + 1)
 
-        # 전시회의 주제가 바뀌었을 경우
+    while i < len(exhibitions):
+        if Flag != exhibitions[i]:
+            Flag = exhibitions[i]
+            bp = [0] * (max(adj_list) + 1)
 
+        result.append(len(q))
+        next_q = []
+
+        for n in q:
+            if bp[n] < 2:
+                bp[n] += 1
+                for neighbor in adj_list.get(n, []):  # 인접 리스트를 사용
+                    if bp[neighbor] < 2:
+                        next_q.append(neighbor)
+
+        q = next_q
+        i += 1
+
+bfs()
+
+### 시간 복잡도 O(N*M) --> O(N+M)으로 효율성 증대
+### 공간 복잡도 : O(connection 내 원소의 개수) : 알아서 제한 뒀을 듯
