@@ -16,10 +16,9 @@ def solution(n, works):
     # 4 3 3. > 3 3 3 > 2 3 3 > 2 2 3 > 2 2 2
     # 해당 시점에서 가장 큰 수를 1씩 빼는 것으로 진행
 
-    works = Counter(works) # { 3: 2, 4: 1}
-    k = sorted(works.keys(), reverse=True)
+    works = Counter(works)
     
-    value = k[0]
+    value = max(works.keys())
     
     i = 0
     while i < n: 
