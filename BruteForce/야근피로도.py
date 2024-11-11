@@ -21,7 +21,7 @@ def solution(n, works):
     
     value = k[0]
     
-    i, j = 0, 0
+    i = 0
     while i < n: 
         if n - i < works[value]:
             works[value] -= n-i
