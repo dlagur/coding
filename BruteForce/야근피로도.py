@@ -35,3 +35,25 @@ def solution(n, works):
             
     result = [y*(x**2) for x, y in works.items()] 
     return sum(result)
+
+
+### 최대 힙 방식을 사용한다면, 코드의 효율을 최적화할 수 있다(O(n) -> O(n log k). k는 works 내 고유한 작업량의 개수)
+
+from heapq import heapify, heappop, heappush
+
+def solution(n, works):
+    if sum(works) <= n:
+        return 0
+
+    # 최대 힙으로 변환 (부호를 반대로 하여 최대값을 최우선으로 뽑기)
+    works = [-work for work in works]
+    heapify(works)
+
+    for _ in range(n):
+        # 가장 큰 작업량을 꺼내서 1 감소
+        max_work = heappop(works)
+        max_work += 1  # 부호 반대이므로 +1
+        heappush(works, max_work)  # 다시 힙에 넣기
+
+    # 결과 계산: 남은 작업량을 제곱한 후 합산
+    return sum(work ** 2 for work in works)
